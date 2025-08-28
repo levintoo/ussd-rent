@@ -1,18 +1,8 @@
 "use client";
 
 import * as React from "react";
-import {
-  AudioWaveform,
-  Command,
-  Home,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Bed,
-  UserRound,
-  DollarSign,
-} from "lucide-react";
+import { Home, Bed, UserRound, DollarSign } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import { NavUser } from "@/components/nav-user";
 import { NavMain } from "@/components/nav-main";
@@ -25,38 +15,43 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 
-// This is sample data.
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  main: [
-    {
-      name: "Home",
-      url: "/dashboard",
-      icon: Home,
-    },
-    {
-      name: "Units",
-      url: "/units",
-      icon: Bed,
-    },
-    {
-      name: "Tenants",
-      url: "/tenants",
-      icon: UserRound,
-    },
-    {
-      name: "Payments",
-      url: "/payments",
-      icon: DollarSign,
-    }
-  ],
-};
-
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname();
+
+  const data = {
+    user: {
+      name: "shadcn",
+      email: "m@example.com",
+      avatar: "/avatars/shadcn.jpg",
+    },
+    main: [
+      {
+        name: "Home",
+        url: "/dashboard",
+        icon: Home,
+        active: pathname?.startsWith("/dashboard") ?? false,
+      },
+      {
+        name: "Units",
+        url: "/units",
+        icon: Bed,
+        active: pathname?.startsWith("/units") ?? false,
+      },
+      {
+        name: "Tenants",
+        url: "/tenants",
+        icon: UserRound,
+        active: pathname?.startsWith("/tenants") ?? false,
+      },
+      {
+        name: "Payments",
+        url: "/payments",
+        icon: DollarSign,
+        active: pathname?.startsWith("/payments") ?? false,
+      },
+    ],
+  };
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>

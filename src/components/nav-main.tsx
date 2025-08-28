@@ -12,6 +12,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export function NavMain({
   projects,
@@ -20,6 +21,7 @@ export function NavMain({
     name: string;
     url: string;
     icon: LucideIcon;
+    active: boolean;
   }[];
 }) {
   return (
@@ -28,10 +30,10 @@ export function NavMain({
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton className={cn(item.active && "bg-primary/10")} asChild>
               <Link href={item.url}>
-                <item.icon />
-                <span>{item.name}</span>
+                <item.icon className={cn(item.active && "text-primary")} />
+                <span className={cn(item.active && "text-primary")}>{item.name}</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -40,3 +42,4 @@ export function NavMain({
     </SidebarGroup>
   );
 }
+  

@@ -8,6 +8,34 @@
       "when": 1756376633555,
       "tag": "0000_tan_rawhide_kid",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1756382921432,
+      "tag": "0001_rainy_raider",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1756383872946,
+      "tag": "0002_confused_skin",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1756385547069,
+      "tag": "0003_unknown_human_torch",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1756386298701,
+      "tag": "0004_strong_wasp",
+      "breakpoints": true
     }
   ]
 }

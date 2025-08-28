@@ -8,8 +8,19 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { db } from "@/db";
+import { units } from "@/db/schema/units";
+import { UnitsTable } from "./units-table";
+import { UnitCreateDrawer } from "./unit-create-drawer";
 
-export default function Page() {
+export default async function Page() {
+  let data: Array<{ id: string; unitNumber: string; monthlyRent: number }> = [];
+  try {
+    data = await db.select().from(units).orderBy(units.unitNumber);
+  } catch {
+    data = [];
+  }
+
   return (
     <>
       <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
@@ -31,14 +42,12 @@ export default function Page() {
             </BreadcrumbList>
           </Breadcrumb>
         </div>
+        <div className="ml-auto px-4">
+          <UnitCreateDrawer />
+        </div>
       </header>
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          <div className="bg-muted/50 aspect-video rounded-xl" />
-          <div className="bg-muted/50 aspect-video rounded-xl" />
-          <div className="bg-muted/50 aspect-video rounded-xl" />
-        </div>
-        <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
+        <UnitsTable units={data} />
       </div>
     </>
   );
