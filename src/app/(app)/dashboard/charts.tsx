@@ -12,7 +12,12 @@ import {
   Tooltip,
   XAxis,
   YAxis,
+  type TooltipProps,
 } from "recharts";
+import type {
+  NameType,
+  ValueType,
+} from "recharts/types/component/DefaultTooltipContent";
 
 export type TenantKpiDatum = { name: string; due: number; paid: number };
 export type DailyNetDatum = { date: string; net: number };
@@ -24,18 +29,23 @@ const fmtCurrency = (n: number) =>
     maximumFractionDigits: 2,
   }).format(n);
 
-function CurrencyTooltip({ label, payload }: any) {
-  if (!payload?.length) return null;
+function CurrencyTooltip({
+  label,
+  payload,
+}: TooltipProps<ValueType, NameType>) {
+  if (!payload || payload.length === 0) return null;
   return (
     <div className="bg-background/90 backdrop-blur rounded-md border shadow p-2 text-sm">
-      <div className="text-muted-foreground mb-1">{label}</div>
-      {payload.map((p: any) => (
-        <div key={p.dataKey} className="flex items-center gap-2">
+      <div className="text-muted-foreground mb-1">{String(label ?? "")}</div>
+      {payload.map((p) => (
+        <div key={String(p.dataKey)} className="flex items-center gap-2">
           <span
             className="inline-block size-2 rounded-sm"
             style={{ background: p.color }}
           />
-          <span className="min-w-24 capitalize">{p.name ?? p.dataKey}</span>
+          <span className="min-w-24 capitalize">
+            {String(p.name ?? p.dataKey)}
+          </span>
           <span className="font-medium">
             {fmtCurrency(Number(p.value ?? 0))}
           </span>

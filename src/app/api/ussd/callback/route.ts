@@ -40,10 +40,14 @@ async function getBody(request: Request): Promise<Record<string, string>> {
   }
 }
 
+type SessionLike = { user?: { phone?: string } } | null;
+
 async function resolvePhoneFromSession(): Promise<string | null> {
   try {
-    const session = await auth.api.getSession({ headers: await headers() });
-    const phone = (session as any)?.user?.phone as string | undefined;
+    const session = (await auth.api.getSession({
+      headers: await headers(),
+    })) as SessionLike;
+    const phone = session?.user?.phone;
     return phone ?? null;
   } catch {
     return null;
