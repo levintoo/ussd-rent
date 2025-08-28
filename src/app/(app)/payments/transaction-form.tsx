@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler, type Resolver } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,7 +26,9 @@ type Props = {
 
 export function TransactionForm({ tenants, onSuccess }: Props) {
   const form = useForm<CreateTransactionInput>({
-    resolver: zodResolver(createTransactionSchema),
+    resolver: zodResolver(
+      createTransactionSchema
+    ) as Resolver<CreateTransactionInput>,
     defaultValues: { tenantId: "", amount: 0, note: "" },
   });
 
