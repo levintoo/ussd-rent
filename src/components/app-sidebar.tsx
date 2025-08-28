@@ -52,7 +52,7 @@ const data = {
       name: "Payments",
       url: "/payments",
       icon: DollarSign,
-    },
+    }
   ],
 };
 

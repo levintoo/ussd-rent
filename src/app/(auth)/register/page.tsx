@@ -1,7 +1,7 @@
 import { GalleryVerticalEnd } from "lucide-react";
 import Link from "next/link";
 
-import { LoginForm } from "@/app/(auth)/login/login-form";
+import { RegisterForm } from "@/app/(auth)/register/register-form";
 
 export default function LoginPage() {
   return (
@@ -16,7 +16,7 @@ export default function LoginPage() {
           </div>
           Acme Inc.
         </Link>
-        <LoginForm />
+        <RegisterForm />
       </div>
     </div>
   );
